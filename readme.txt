@@ -11,7 +11,7 @@ Simple and affordable solution to create native mobile apps for your website. On
 
 == Description ==
 
-**Mobapper helps you create native mobile apps for your WordPress website in three simple steps. You can create apps for iOS, Android, Windows and Blackberry. All of your content will be readily available in the apps. This plugin also lets you control the contents delivered to mobile. **
+**Mobapper helps you create native mobile apps for your WordPress website in three simple steps. You can create apps for iOS, Android, Windows and Blackberry. All of your content will be readily available in the apps. This plugin also lets you control the contents delivered to mobile.**
 
 Native mobile apps helps you getting more returning users and that brings more revenue from mobile. Mobapper also lets you integrate admob to the apps that you build. Which opens up a new revenue stream.
 
@@ -35,19 +35,19 @@ Please feel free to get in touch with us for any further queries at [info@mobapp
 
 Installing “Mobapper” plugin from your WordPress admin panel
 
-Go to Plugins page, and add new plugin.
-Search for “mobapper” and select mobapper plugin from the list
-Click Install Now  button
-Then click Activate button
+1. Go to Plugins page, and add new plugin.
+2. Search for “mobapper” and select mobapper plugin from the list
+3. Click Install Now  button
+4. Then click Activate button
 
 Installing “Mobapper” plugin from Mobapper website or WordPress plugin directory
 
-Click Download button 
-Go to Plugins page, and add new plugin.
-Click on Upload menu
-Choose “Mobapper” plugin and upload it
-Click on Install Now
-Then click on Activate button
+1. Click Download button 
+2. Go to Plugins page, and add new plugin.
+3. Click on Upload menu
+4. Choose “Mobapper” plugin and upload it
+5. Click on Install Now
+6. Then click on Activate button
 
 == Frequently Asked Questions ==
 
