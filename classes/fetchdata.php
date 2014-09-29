@@ -137,6 +137,78 @@ class MOBAPPER_FETCH_DATA {
         $this->json_builder->adddata('post', $result);
         $this->json_builder->endFlow($this->json_builder->toJson());
     }
+    
+    
+    function get_search_posts() {
+        $this->json_builder->createjsonObject();
+        global $post;
+        global $wp_query;
+        $query = array(
+            'page' => $_GET['page'],
+            'posts_per_page' => $_GET['count'],
+            'paged' => $_GET['page'],
+            's' => trim($_GET['search_value'])
+        );
+
+        $posts = $this->get_posts($query);
+
+        while (have_posts()) {
+            the_post();
+            $post_result = $this->fetch_post_data($post);
+
+            $result[] = $post_result;
+        }
+        if(!$result)
+        {
+            $result = "";
+        }
+        $this->json_builder->adddata('status', "success");
+        $this->json_builder->adddata('count', count($result));
+        $this->json_builder->adddata('total_count', (int) $wp_query->found_posts);
+        $this->json_builder->adddata('pages', $wp_query->max_num_pages);
+        $this->json_builder->adddata('posts', $result);
+        $this->json_builder->endFlow($this->json_builder->toJson());
+    }
+    
+    function get_pages($ex_pagess = FALSE) {
+        $this->json_builder->createjsonObject();
+        global $post;
+        global $wp_query;
+        $query = array(
+            'post_type' => 'page',
+            'post_parent' => 0,
+            'exclude' => $ex_pagess,
+            'sort_order' => 'DESC',
+            'sort_column' => 'post_title',
+            'number' => $_GET['count']
+        );
+
+        //$posts = $this->get_posts($query);
+        $pages = get_pages($query);
+        //die(print_r($pages));
+        foreach ($pages as $page) {
+            $post = $page;
+            $post_result = $this->fetch_post_data($post);
+
+            $result[] = $post_result;
+        }
+        if(!$result)
+        {
+            $result = "";
+        }
+        $this->json_builder->adddata('status', "success");
+        $this->json_builder->adddata('pages', $result);
+        $this->json_builder->endFlow($this->json_builder->toJson());
+    }
+    
+    function info()
+    {
+        $this->json_builder->createjsonObject();
+        $this->json_builder->adddata('Version', "1.1");
+        $this->json_builder->endFlow($this->json_builder->toJson());
+    }
+
+    
 
     public function get_posts($query = FALSE) {
         query_posts($query);
@@ -200,7 +272,7 @@ class MOBAPPER_FETCH_DATA {
         $re['status'] = $post_data->post_status;
         $re['title'] = get_the_title($post_data->ID);
         $re['title_plain'] = strip_tags(get_the_title($post_data->ID));
-        $re['content'] = get_the_content($post_data->ID);
+        $re['content'] = apply_filters('the_content',get_the_content($post_data->ID));
         $re['excerpt'] = apply_filters('the_excerpt', get_the_excerpt());
         $re['date'] = get_the_time($date_format);
         $re['modified'] = date($date_format, strtotime($post_data->post_modified));
@@ -342,8 +414,9 @@ class MOBAPPER_FETCH_DATA {
                 }
                 $array[] = $category;
             }
-            return $array;
+            
         }
+        return $array;
     }
 
     function fetch_post_tags() {

@@ -36,6 +36,26 @@ class MOBAPPER {
                     $this->fetch_data->get_single_post();
                 }
             }
+            
+            if ($cur[0] == "search_posts") {
+                if (!isset($_GET['search_value'])) {
+                    $this->fetch_data->print_this_error('Please provide a search value');
+                } else {
+                    $this->fetch_data->get_search_posts();
+                }
+            }
+            
+            if ($cur[0] == "get_pages") {
+                    $ex_pages = $opt['exclude_pages'];
+                    $this->fetch_data->get_pages($ex_pages);
+                
+            }
+            
+            if ($cur[0] == "info") {
+                    $this->fetch_data->info();
+                
+            }
+            
         }
 
         if (isset($_REQUEST['mobapper'])) {
@@ -65,7 +85,26 @@ class MOBAPPER {
                     $this->fetch_data->get_single_post();
                 }
             }
-        }
+            
+            if ($_REQUEST['mobapper'] == "search_posts") {
+                if (!isset($_GET['search_value'])) {
+                    $this->fetch_data->print_this_error('Please provide a search value');
+                } else {
+                    $this->fetch_data->get_search_posts();
+               }
+           }
+           
+           if ($_REQUEST['mobapper'] == "get_pages") {
+               $ex_pages = $opt['exclude_pages'];
+               $this->fetch_data->get_pages($ex_pages);
+           }
+           
+           if ($_REQUEST['mobapper'] == "info") {
+               $this->fetch_data->info();
+           }
+           
+     }
+      
     }
 
 }
