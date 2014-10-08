@@ -3,7 +3,7 @@ Contributors: mobapper
 Tags: android, App, ios app, iPad,ipad app, iphone app, mobile,mobile app, mobile plugin, mobile theme, mobile web, mobile website, mobapper, native app, iphone, responsive, tablet, web app, windows mobile, wordpress mobile, blackberry, blackberry 10, admob
 Requires at least: 3.7
 Tested up to: 4.0
-Stable tag: 1.0
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
