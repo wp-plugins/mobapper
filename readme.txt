@@ -51,9 +51,45 @@ Installing “Mobapper” plugin from Mobapper website or WordPress plugin direc
 
 == Frequently Asked Questions ==
 
+= What is Mobapper? =
+
+Mobapper is a cloud platform for generating native mobile apps from wordpress websites.
+
+= Who can create a mobile app using Mobapper? =
+
+Any WordPress powered website that has the capability to install a WordPress plugin can use Mobapper and create native mobile apps.
+
 = Do I need to know programming to create the application =
 
 No, the process of creating an application is a simple 3 step process. You don’t need to know programming to create an application.
+
+= How is Mobapper different from other app makers? =
+
+Most app makers use non native technologies like HTML5.These apps look more like websites and perform really sluggish. Mobapper on the other hand creates completely "native" app. Native apps provides smooth performance with look and design.
+
+= Will my app work offline? =
+
+Yes, you will be able to see and read the content even if you are offline.
+
+= Can I publish the app to appstore? =
+
+Yes, you can publish the app in appstore.
+
+= Can I place ads in generated apps? =
+
+Yes, you can place ads in apps. For that you need to provide us the admob details.
+
+= Can I test my app before I purchase? =
+
+Yes, you can create your app in a couple of minutes using our wordpress plugin and you can then test it in your device.
+
+= Does I need to care about the app everyday? =
+
+No. Mobapper will automatically update the content when it gets published in Wordpress site.
+
+= Do you publish the apps for me? =
+
+Yes, we provide facilities to submit your app through Mobapper account.
 
 
 == Screenshots ==
