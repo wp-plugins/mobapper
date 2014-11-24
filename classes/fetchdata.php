@@ -204,7 +204,7 @@ class MOBAPPER_FETCH_DATA {
     function info()
     {
         $this->json_builder->createjsonObject();
-        $this->json_builder->adddata('Version', "1.1");
+        $this->json_builder->adddata('Version', "1.2");
         $this->json_builder->endFlow($this->json_builder->toJson());
     }
 
