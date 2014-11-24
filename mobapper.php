@@ -3,7 +3,7 @@
   Plugin Name: Mobapper
   Plugin URI: http://www.mobapper.com/
   Description: Create native mobile apps for WordPress in 3 simple steps. No coding required.
-  Version: 1.1
+  Version: 1.2
   Author: Mobapper
   Author URI: http://www.mobapper.com
  */

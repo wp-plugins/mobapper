@@ -468,6 +468,104 @@ class MOBAPPER_FETCH_DATA {
         return $array;
     }
 
+    Function add_comment() {
+        global $comment, $wpdb;
+        add_action('comment_id_not_found', array(&$this, 'comment_id_not_found'));
+        add_action('comment_closed', array(&$this, 'comment_closed'));
+        add_action('comment_on_draft', array(&$this, 'comment_on_draft'));
+        add_filter('comment_post_redirect', array(&$this, 'comment_post_redirect'));
+        $_SERVER['REQUEST_METHOD'] = 'POST';
+        $_POST['comment_post_ID'] = $_REQUEST['post_id'];
+        $_POST['author'] = $_REQUEST['name'];
+        $_POST['email'] = $_REQUEST['email'];
+        $_POST['url'] = empty($_REQUEST['url']) ? '' : $_REQUEST['url'];
+        $_POST['comment'] = $_REQUEST['content'];
+        $_POST['parent'] = empty($_REQUEST['url']) ? '' : $_REQUEST['parent'];
+        error_reporting(0);
+        include ABSPATH . 'wp-comments-post.php';
+    }
+
+    function comment_id_not_found() {
+        $this->print_this_error("Post ID " . $_REQUEST['post_id'] . " not found.");
+    }
+
+    function comment_closed() {
+        $this->print_this_error("Post is closed for comments.");
+    }
+
+    function comment_on_draft() {
+       
+        $this->print_this_error("You cannot comment on unpublished posts.");
+    }
+
+    function comment_post_redirect() {
+        global $comment;
+        $date_format = "c";
+        $content = apply_filters('comment_text', $comment->comment_content);
+        $this->json_builder->createjsonObject();
+        $status = ($comment->comment_approved) ? 'ok' : 'pending';
+        $this->json_builder->adddata('status', "success");
+        $this->json_builder->adddata('comment_status', $status);
+        $this->json_builder->adddata('id', $comment->comment_ID);
+        $this->json_builder->adddata('name', $comment->comment_author);
+        $this->json_builder->adddata('url', $comment->comment_author_url);
+        $this->json_builder->adddata('date', date($date_format, strtotime($comment->comment_date)));
+        $this->json_builder->adddata('content', $content);
+        $this->json_builder->adddata('parent', $comment->comment_parent);
+        $this->json_builder->endFlow($this->json_builder->toJson());
+    }
+
+    function get_pages_and_categories($args = FALSE, $ex_pagess = FALSE) {
+        global $post;
+        global $wp_query;
+        $cat_result = array();
+        $page_result = array();
+        $this->json_builder->createjsonObject();
+        $categories = get_categories($args);
+        
+        $c = 0;
+        foreach ($categories as $category) {
+
+            if ($category->term_id == 1 && $category->slug == 'uncategorized') {
+                
+            } else {
+                $cat_result[] = $this->fetch_cat_data($category);
+                $c++;
+            }
+        }
+        $count = count($cat_result);
+       
+        $query = array(
+            'post_type' => 'page',
+            'post_parent' => 0,
+            'exclude' => $ex_pagess,
+            'sort_order' => 'DESC',
+            'sort_column' => 'post_title',
+            'number' => $_GET['count']
+        );
+
+        //$posts = $this->get_posts($query);
+        $pages = get_pages($query);
+        //die(print_r($pages));
+        foreach ($pages as $page) {
+            $post = $page;
+            $post_result = $this->fetch_post_data($post);
+
+            $page_result[] = $post_result;
+        }
+        
+        if(!$page_result) {
+            $page_result = "";
+        }
+        
+        $this->json_builder->adddata('status', 'success');
+        $this->json_builder->adddata('category_count', $count);
+        $this->json_builder->adddata('categories', $cat_result);
+        $this->json_builder->adddata('pages', $page_result);
+        $this->json_builder->endFlow($this->json_builder->toJson());
+    }
+
+
 }
 
 ?>

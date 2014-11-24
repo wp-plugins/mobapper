@@ -55,6 +55,29 @@ class MOBAPPER {
                     $this->fetch_data->info();
                 
             }
+
+            if ($cur[0] == "add_comment") {
+                 nocache_headers();
+                if (empty($_REQUEST['post_id'])) {
+                   $this->fetch_data->print_this_error('Please provide post id'); 
+                } else if (empty($_REQUEST['name'])) {
+                   $this->fetch_data->print_this_error('Please provide name'); 
+                } else if (empty($_REQUEST['email'])) {
+                    $this->fetch_data->print_this_error('Please provide email'); 
+                } else if (empty($_REQUEST['content'])) {
+                   $this->fetch_data->print_this_error('Please provide content');  
+                } else if (!is_email($_REQUEST['email'])) {
+                    $this->fetch_data->print_this_error("Please enter a valid email address.");
+                }else{
+                   $this->fetch_data->add_comment();  
+                }
+             }
+             
+             if ($cur[0] == "get_pages_and_categories") {
+                $args = array("exclude" => $opt['exclude_categories']);
+                $ex_pages = $opt['exclude_pages'];
+                $this->fetch_data->get_pages_and_categories($args, $ex_pages);
+            }  
             
         }
 
@@ -102,6 +125,29 @@ class MOBAPPER {
            if ($_REQUEST['mobapper'] == "info") {
                $this->fetch_data->info();
            }
+
+           if ($_REQUEST['mobapper'] == "add_comment") {
+                nocache_headers();
+                if (empty($_REQUEST['post_id'])) {
+                   $this->fetch_data->print_this_error('Please provide post id'); 
+                } else if (empty($_REQUEST['name'])) {
+                   $this->fetch_data->print_this_error('Please provide name'); 
+                } else if (empty($_REQUEST['email'])) {
+                    $this->fetch_data->print_this_error('Please provide email'); 
+                } else if (empty($_REQUEST['content'])) {
+                   $this->fetch_data->print_this_error('Please provide content');  
+                } else if (!is_email($_REQUEST['email'])) {
+                    $this->fetch_data->print_this_error("Please enter a valid email address.");
+                }else{
+                   $this->fetch_data->add_comment();  
+                }
+            }
+            
+            if ($_REQUEST['mobapper'] == "get_pages_and_categories") {
+                $args = array("exclude" => $opt['exclude_categories']);
+                $ex_pages = $opt['exclude_pages'];
+                $this->fetch_data->get_pages_and_categories($args, $ex_pages);
+            }
            
      }
       
