@@ -111,3 +111,6 @@ Added page control function
 
 = 1.2 = 
 Added support for commenting
+
+= 1.2.1 = 
+Removed error messages on activation.
