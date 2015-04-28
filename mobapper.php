@@ -23,7 +23,7 @@ function mobapper_init() {
 
 function mobapper_activation() {
     global $wp_rewrite;
-    add_filter('rewrite_rules_array', 'moabapper_rewrites');
+    add_filter('rewrite_rules_array', 'mobapper_rewrites');
     $wp_rewrite->flush_rules();
 }
 
