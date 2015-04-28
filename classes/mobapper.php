@@ -117,8 +117,12 @@ class MOBAPPER {
                }
            }
            
-           if ($_REQUEST['mobapper'] == "get_pages") {
-               $ex_pages = $opt['exclude_pages'];
+            if ($_REQUEST['mobapper'] == "get_pages") {
+                
+                $ex_pages = array();
+                if (isset($opt['exclude_pages'])){
+                    $ex_pages = $opt['exclude_pages'];
+               }
                $this->fetch_data->get_pages($ex_pages);
            }
            

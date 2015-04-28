@@ -180,12 +180,16 @@ class MOBAPPER_FETCH_DATA {
             'exclude' => $ex_pagess,
             'sort_order' => 'DESC',
             'sort_column' => 'post_title',
-            'number' => $_GET['count']
         );
+        
+        if(isset($_GET['count'])) {
+            $query['number'] = $_GET['count'];
+        }
 
         //$posts = $this->get_posts($query);
         $pages = get_pages($query);
         //die(print_r($pages));
+        $result = array();
         foreach ($pages as $page) {
             $post = $page;
             $post_result = $this->fetch_post_data($post);
